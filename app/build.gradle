@@ -5,10 +5,10 @@ android {
 
     signingConfigs {
         sigin {
-            storeFile file("BUNNY.jks")
-            storePassword "000624"
-            keyAlias "bunny"
-            keyPassword "426000"
+            storeFile file("初忆.jks")
+            storePassword "1838555724"
+            keyAlias "初忆"
+            keyPassword "1838555724"
         }
     }
 
@@ -36,7 +36,7 @@ android {
         targetSdkVersion 26
         versionCode 25
         versionName '0.0.0'
-        multiDexEnabled true
+        multiDexEnabled false
         //设置room的Schema的位置
         javaCompileOptions {
             annotationProcessorOptions {
@@ -61,7 +61,7 @@ android {
         }
         release {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            minifyEnabled true
+            minifyEnabled false
 
             ndk {
                 abiFilters 'armeabi-v7a'
