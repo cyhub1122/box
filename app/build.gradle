@@ -36,7 +36,7 @@ android {
         targetSdkVersion 26
         versionCode 25
         versionName '0.0.0'
-        multiDexEnabled false
+        multiDexEnabled true
         //设置room的Schema的位置
         javaCompileOptions {
             annotationProcessorOptions {
