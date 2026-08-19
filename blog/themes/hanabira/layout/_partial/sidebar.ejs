@@ -1,0 +1,47 @@
+<aside class="sidebar">
+  <div class="widget profile-card glass reveal">
+    <div class="avatar"><img src="<%- url_for(theme.avatar) %>" alt="<%= theme.author %>"></div>
+    <h2 class="name"><%= theme.author %></h2>
+    <% if (theme.bio) { %><p class="bio"><%= theme.bio %></p><% } %>
+    <% if (theme.motto) { %><p class="motto"><%= theme.motto %></p><% } %>
+    <% if (theme.signature) { %><p class="signature"><%= theme.signature %></p><% } %>
+    <% if (theme.socials) { %>
+      <div class="socials">
+        <% if (theme.socials.github) { %><a href="<%= theme.socials.github %>" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24"><use href="#i-github"></use></svg></a><% } %>
+        <% if (theme.socials.mail) { %><a href="<%= theme.socials.mail %>" aria-label="邮箱"><svg viewBox="0 0 24 24"><use href="#i-mail"></use></svg></a><% } %>
+        <% if (theme.socials.rss) { %><a href="<%- url_for(theme.socials.rss) %>" aria-label="RSS"><svg viewBox="0 0 24 24"><use href="#i-rss"></use></svg></a><% } %>
+      </div>
+    <% } %>
+  </div>
+
+  <div class="widget glass reveal">
+    <div class="stats">
+      <div class="stat"><div class="num"><%= site.posts.length %></div><div class="label">文章</div></div>
+      <div class="stat"><div class="num"><%= site.categories.length %></div><div class="label">分类</div></div>
+      <div class="stat"><div class="num"><%= site.tags.length %></div><div class="label">标签</div></div>
+    </div>
+  </div>
+
+  <div class="widget glass reveal">
+    <h3 class="widget-title"><svg viewBox="0 0 24 24"><use href="#i-pen"></use></svg> 最近更新</h3>
+    <ul class="recent-list">
+      <% site.posts.sort('-date').limit(6).each(function (p) { %>
+        <li><a href="<%- url_for(p.path) %>"><span class="dot"></span><%- p.title %></a></li>
+      <% }) %>
+    </ul>
+  </div>
+
+  <% var cloudTags = site.tags.sort('length', -1).limit(20); %>
+  <% if (cloudTags.length) { %>
+  <div class="widget glass reveal">
+    <h3 class="widget-title"><svg viewBox="0 0 24 24"><use href="#i-tags"></use></svg> 标签云</h3>
+    <div class="tag-cloud">
+      <% var maxCount = cloudTags.first().length || 1; %>
+      <% cloudTags.each(function (t) { %>
+        <% var size = Math.min(5, Math.max(0, Math.floor((t.length / maxCount) * 5))); %>
+        <a class="size-<%= size %>" href="<%- url_for(t.path) %>"><%= t.name %></a>
+      <% }) %>
+    </div>
+  </div>
+  <% } %>
+</aside>

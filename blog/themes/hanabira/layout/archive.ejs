@@ -1,0 +1,16 @@
+<div class="container">
+  <h1 class="page-title reveal">归档</h1>
+  <div class="timeline glass reveal">
+    <% var groups = postsByYear(page.posts); %>
+    <% if (groups.length === 0) { %><div class="empty">暂无归档</div><% } %>
+    <% groups.forEach(function (g) { %>
+      <div class="year"><%= g.year %></div>
+      <% g.posts.forEach(function (post) { %>
+        <div class="timeline-item">
+          <div class="date"><%= date(post.date, 'YYYY-MM-DD') %></div>
+          <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+        </div>
+      <% }) %>
+    <% }) %>
+  </div>
+</div>

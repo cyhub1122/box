@@ -1,0 +1,18 @@
+<div class="container">
+  <h1 class="page-title reveal"><svg viewBox="0 0 24 24" style="width:28px;height:28px;vertical-align:-4px"><use href="#i-friends"></use></svg> 友链</h1>
+  <% if (theme.friends && theme.friends.length) { %>
+    <div class="friends-list">
+      <% theme.friends.forEach(function (f) { %>
+        <a class="friend-card glass reveal" href="<%= f.url %>" target="_blank" rel="noopener">
+          <img src="<%- f.avatar ? url_for(f.avatar) : url_for(theme.avatar) %>" alt="<%= f.name %>" loading="lazy">
+          <span>
+            <span class="f-name"><%= f.name %></span>
+            <% if (f.desc) { %><span class="f-desc"><%= f.desc %></span><% } %>
+          </span>
+        </a>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="glass empty">还没有友链，欢迎来交换～</div>
+  <% } %>
+</div>

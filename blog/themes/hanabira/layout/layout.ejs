@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>">
+<head>
+  <%- partial('_partial/head') %>
+</head>
+<body>
+  <%- partial('_partial/icons') %>
+  <% if (theme.effects.sakura) { %><canvas id="sakura-canvas" aria-hidden="true"></canvas><% } %>
+  <% if (theme.effects.cursor_glow) { %><div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div><% } %>
+  <% if (theme.effects.reading_progress) { %><div class="reading-progress" aria-hidden="true"></div><% } %>
+  <%- partial('_partial/header') %>
+  <%- body %>
+  <%- partial('_partial/footer') %>
+  <button class="back-to-top" aria-label="回到顶部">
+    <svg viewBox="0 0 24 24"><use href="#i-arrow-up"></use></svg>
+  </button>
+  <%- partial('_partial/scripts') %>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<script>
+  window.HANABIRA_WORDS = <%- JSON.stringify(theme.hero && theme.hero.typewriter ? theme.hero.typewriter : []) %>;
+</script>
+<script src="<%- url_for('/js/main.js') %>" defer></script>
+<% if (theme.comment && theme.comment.type === 'giscus' && theme.comment.giscus && theme.comment.giscus.repo && theme.comment.giscus.repo_id && theme.comment.giscus.category_id) { %>
+<script src="https://giscus.app/client.js"
+  data-repo="<%= theme.comment.giscus.repo %>"
+  data-repo-id="<%= theme.comment.giscus.repo_id %>"
+  data-category="<%= theme.comment.giscus.category %>"
+  data-category-id="<%= theme.comment.giscus.category_id %>"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="top"
+  data-theme="preferred_color_scheme"
+  data-lang="zh-CN"
+  crossorigin="anonymous" async>
+</script>
+<% } %>

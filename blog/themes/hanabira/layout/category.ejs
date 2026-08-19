@@ -1,0 +1,24 @@
+<% if (typeof page.category !== 'undefined') { %>
+  <div class="container">
+    <h1 class="page-title reveal"><svg viewBox="0 0 24 24" style="width:28px;height:28px;vertical-align:-4px"><use href="#i-folder"></use></svg> 分类：<%= page.category %></h1>
+    <section class="posts">
+      <% page.posts.each(function (post) { %>
+        <%- partial('_partial/card', { post: post }) %>
+      <% }) %>
+      <% if (page.posts.length === 0) { %><div class="glass empty">该分类下暂无文章</div><% } %>
+      <%- partial('_partial/pagination') %>
+    </section>
+  </div>
+<% } else { %>
+  <div class="container">
+    <h1 class="page-title reveal"><svg viewBox="0 0 24 24" style="width:28px;height:28px;vertical-align:-4px"><use href="#i-categories"></use></svg> 分类</h1>
+    <div class="tax-list">
+      <% site.categories.each(function (cat) { %>
+        <a class="tax-card glass reveal" href="<%- url_for(cat.path) %>">
+          <span class="name"><svg viewBox="0 0 24 24"><use href="#i-folder"></use></svg> <%= cat.name %></span>
+          <span class="count"><%= cat.length %></span>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+<% } %>

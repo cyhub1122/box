@@ -1,0 +1,64 @@
+# Hanabira 主题配置
+# ==================
+# 站点基本信息（用于侧边栏个人卡 / 顶部品牌）
+blog_title: 我的个人博客
+logo: 花瓣
+author: cyhub1122
+avatar: /images/avatar.jpg
+bio: やまとなでしこ・记录生活的每一片花瓣
+motto: 「 一期一会 」
+signature: "代码 · 摄影 · 二次元"
+
+# 顶部导航（icon 使用内置图标名：home/archive/categories/tags/about/friends）
+nav:
+  - { title: 首页, link: /, icon: home }
+  - { title: 归档, link: /archives/, icon: archive }
+  - { title: 分类, link: /categories/, icon: categories }
+  - { title: 标签, link: /tags/, icon: tags }
+  - { title: 关于, link: /about/, icon: about }
+  - { title: 友链, link: /friends/, icon: friends }
+
+# 社交链接（侧边栏个人卡）
+socials:
+  github: https://github.com/cyhub1122
+  mail: mailto:1838555724@qq.com
+  rss: /atom.xml
+
+# 友链数据
+friends:
+  - { name: 示例友链 A, avatar: /images/avatar.jpg, url: https://example.com, desc: 写着漂亮代码的人 }
+
+# 特效开关
+effects:
+  sakura: true        # 樱花飘落
+  typewriter: true    # 首页打字机
+  dark_mode: true     # 深浅色切换
+  reading_progress: true  # 阅读进度条
+  cursor_glow: true   # 鼠标光晕
+
+# 首页 hero
+hero:
+  greeting: こんにちは、世界
+  typewriter:
+    - 欢迎来到我的小站
+    - 一个关于代码与生活的角落
+    - 每一片花瓣都是一段故事
+
+# 文章卡片
+card:
+  show_cover: true    # 显示封面（无封面则使用渐变占位）
+  show_excerpt: true
+
+# 评论系统（可选，暂不启用则留空 type）
+comment:
+  type: ''
+  giscus:
+    repo: cyhub1122/cyhub1122.github.io
+    repo_id: ''
+    category: Announcements
+    category_id: ''
+
+# 页脚
+footer:
+  since: 2026
+  icp: ''

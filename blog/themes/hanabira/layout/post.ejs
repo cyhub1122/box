@@ -1,0 +1,54 @@
+<article class="post-page">
+  <header class="article-head glass reveal">
+    <% if (page.categories && page.categories.length) { %>
+      <div class="tax-inline">
+        <% page.categories.each(function (c) { %><a class="pill" href="<%- url_for(c.path) %>"><svg viewBox="0 0 24 24"><use href="#i-folder"></use></svg> <%= c.name %></a><% }) %>
+      </div>
+    <% } %>
+    <h1><%= page.title %></h1>
+    <div class="meta">
+      <span><svg viewBox="0 0 24 24"><use href="#i-calendar"></use></svg><%= date(page.date, 'YYYY-MM-DD') %></span>
+      <span><svg viewBox="0 0 24 24"><use href="#i-pen"></use></svg><%= wordCount(page.content) %> 字</span>
+      <span><svg viewBox="0 0 24 24"><use href="#i-fire"></use></svg><%= readingTime(page.content) %> 分钟阅读</span>
+    </div>
+  </header>
+
+  <% var tocHtml = toc(page.content, { list_number: false }); %>
+  <div class="post-content-wrap<%= tocHtml ? '' : ' no-toc' %>">
+    <div class="post-content glass reveal">
+      <%- page.content %>
+    </div>
+    <% if (tocHtml) { %>
+      <aside class="toc-wrap glass">
+        <div class="toc-title"><svg viewBox="0 0 24 24"><use href="#i-list"></use></svg> 目录</div>
+        <%- tocHtml %>
+      </aside>
+    <% } %>
+  </div>
+
+  <footer class="post-footer reveal">
+    <div class="post-license glass">
+      <svg viewBox="0 0 24 24"><use href="#i-info"></use></svg>
+      <span>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</span>
+    </div>
+    <div class="post-nav">
+      <% if (page.prev) { %>
+        <a class="prev" href="<%- url_for(page.prev.path) %>"><div class="dir">‹ 上一篇</div><%= page.prev.title %></a>
+      <% } else { %><span class="prev"></span><% } %>
+      <% if (page.next) { %>
+        <a class="next" href="<%- url_for(page.next.path) %>"><div class="dir">下一篇 ›</div><%= page.next.title %></a>
+      <% } else { %><span class="next"></span><% } %>
+    </div>
+    <% if (page.tags && page.tags.length) { %>
+      <div class="post-tags">
+        <% page.tags.each(function (t) { %><a class="pill" href="<%- url_for(t.path) %>"># <%= t.name %></a><% }) %>
+      </div>
+    <% } %>
+  </footer>
+</article>
+
+<% if (theme.comment && theme.comment.type === 'giscus' && theme.comment.giscus && theme.comment.giscus.repo && theme.comment.giscus.repo_id) { %>
+<section class="comments glass" id="comments">
+  <div class="giscus"></div>
+</section>
+<% } %>

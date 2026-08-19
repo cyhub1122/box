@@ -1,0 +1,25 @@
+<% if (typeof page.tag !== 'undefined') { %>
+  <div class="container">
+    <h1 class="page-title reveal"><svg viewBox="0 0 24 24" style="width:28px;height:28px;vertical-align:-4px"><use href="#i-tags"></use></svg> 标签：<%= page.tag %></h1>
+    <section class="posts">
+      <% page.posts.each(function (post) { %>
+        <%- partial('_partial/card', { post: post }) %>
+      <% }) %>
+      <% if (page.posts.length === 0) { %><div class="glass empty">该标签下暂无文章</div><% } %>
+      <%- partial('_partial/pagination') %>
+    </section>
+  </div>
+<% } else { %>
+  <div class="container">
+    <h1 class="page-title reveal"><svg viewBox="0 0 24 24" style="width:28px;height:28px;vertical-align:-4px"><use href="#i-tags"></use></svg> 标签</h1>
+    <div class="tag-cloud glass reveal" style="padding:26px">
+      <% var allTags = site.tags.sort('length', -1); %>
+      <% if (!allTags.length) { %><div class="empty">暂无标签</div><% } %>
+      <% var maxCount = allTags.length ? allTags.first().length : 1; %>
+      <% allTags.each(function (t) { %>
+        <% var size = Math.min(5, Math.max(0, Math.floor((t.length / maxCount) * 5))); %>
+        <a class="size-<%= size %>" href="<%- url_for(t.path) %>"><%= t.name %> <sup><%= t.length %></sup></a>
+      <% }) %>
+    </div>
+  </div>
+<% } %>

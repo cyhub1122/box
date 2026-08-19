@@ -1,0 +1,38 @@
+<header class="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="<%- url_for('/') %>">
+      <svg viewBox="0 0 24 24" width="24" height="24"><use href="#i-flower"></use></svg>
+      <span><%= theme.logo || theme.blog_title %></span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <% theme.nav.forEach(function (item) { %>
+          <%
+            var cur = (page.path || '').replace(/index\.html$/, '').replace(/\/+$/, '');
+            var linkClean = item.link.replace(/^\//, '').replace(/\/+$/, '');
+            var active = '';
+            if (item.link === '/') {
+              active = is_home() ? 'active' : '';
+            } else if (linkClean && (cur === linkClean || cur.indexOf(linkClean + '/') === 0)) {
+              active = 'active';
+            }
+          %>
+          <li>
+            <a href="<%- url_for(item.link) %>" class="<%= active %>">
+              <svg viewBox="0 0 24 24"><use href="#i-<%= item.icon %>"></use></svg>
+              <span><%= item.title %></span>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" aria-label="切换深浅色主题">
+        <svg viewBox="0 0 24 24"><use href="#i-moon"></use></svg>
+      </button>
+      <button class="nav-burger" aria-label="打开菜单">
+        <svg viewBox="0 0 24 24"><use href="#i-menu"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,15 @@
+<div class="container">
+  <%- partial('_partial/hero') %>
+  <div class="main-grid">
+    <section class="posts">
+      <% page.posts.each(function (post) { %>
+        <%- partial('_partial/card', { post: post }) %>
+      <% }) %>
+      <% if (page.posts.length === 0) { %>
+        <div class="glass empty">还没有文章哦，去写下第一篇吧～</div>
+      <% } %>
+      <%- partial('_partial/pagination') %>
+    </section>
+    <%- partial('_partial/sidebar') %>
+  </div>
+</div>

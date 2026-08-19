@@ -1,0 +1,5 @@
+<footer class="footer">
+  <div class="logo"><%= theme.logo || theme.blog_title %></div>
+  <div>© <%= theme.footer.since %> - <%= new Date().getFullYear() %> · <%= theme.author %> · 由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 与 Hanabira 主题驱动</div>
+  <% if (theme.footer.icp) { %><div><%= theme.footer.icp %></div><% } %>
+</footer>
