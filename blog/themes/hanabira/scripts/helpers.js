@@ -55,8 +55,28 @@ function postsByYear(posts) {
   return Object.keys(map).sort((a, b) => b - a).map((y) => ({ year: y, posts: map[y] }));
 }
 
+// 站点运行天数（默认按站点配置 since 计算）
+function runningDays(sinceStr) {
+  if (!sinceStr) return 0;
+  const start = new Date(sinceStr);
+  if (isNaN(start.getTime())) return 0;
+  const now = new Date();
+  const days = Math.floor((now - start) / 86400000);
+  return Math.max(0, days);
+}
+
+// 站点总字数
+function totalWords(posts) {
+  const list = Array.isArray(posts)
+    ? posts
+    : (posts && typeof posts.toArray === 'function' ? posts.toArray() : []);
+  return list.reduce((sum, p) => sum + wordCount(p.content), 0);
+}
+
 hexo.extend.helper.register('stripHtml', stripHtml);
 hexo.extend.helper.register('wordCount', wordCount);
 hexo.extend.helper.register('readingTime', readingTime);
 hexo.extend.helper.register('postExcerpt', postExcerpt);
 hexo.extend.helper.register('postsByYear', postsByYear);
+hexo.extend.helper.register('runningDays', runningDays);
+hexo.extend.helper.register('totalWords', totalWords);

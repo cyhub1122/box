@@ -1,7 +1,37 @@
 <script>
-  window.HANABIRA_WORDS = <%- JSON.stringify(theme.hero && theme.hero.typewriter ? theme.hero.typewriter : []) %>;
+  window.HANABIRA_CONFIG = {
+    root: <%- JSON.stringify(config.root || '/') %>,
+    words: <%- JSON.stringify((theme.hero && theme.hero.typewriter) ? theme.hero.typewriter : []) %>,
+    danmaku: <%- JSON.stringify(theme.danmaku || []) %>,
+    accentHue: <%- JSON.stringify((theme.appearance && theme.appearance.accent_hue != null) ? theme.appearance.accent_hue : 330) %>,
+    effects: <%- JSON.stringify(theme.effects || {}) %>,
+    live2d: <%- JSON.stringify((theme.live2d && theme.live2d.enable) ? theme.live2d : { enable: false }) %>,
+    music: <%- JSON.stringify((theme.music && theme.music.enable) ? theme.music : { enable: false, autoplay: false, list: [] }) %>
+  };
 </script>
 <script src="<%- url_for('/js/main.js') %>" defer></script>
+<% if (theme.live2d && theme.live2d.enable) { %>
+<script src="https://unpkg.com/oh-my-live2d@latest/dist/index.min.js"></script>
+<script>
+  window.OML2D && window.OML2D.loadOml2d(<%- JSON.stringify({
+    models: [{
+      path: theme.live2d.model || 'https://model.oml2d.com/Pio/model.json',
+      scale: theme.live2d.scale != null ? theme.live2d.scale : 1,
+      position: [0, 20],
+      stageStyle: { width: 280, height: 330 }
+    }],
+    dockedPosition: theme.live2d.position === 'right' ? 'right' : 'left',
+    mobileShow: !!(theme.live2d.mobile_show),
+    transitionTime: 1500,
+    tips: {
+      style: { width: 220, height: 76, fontSize: 13, wordWrap: true },
+      welcomeTips: { message: theme.live2d.welcome || '欢迎光临～', duration: 4000 },
+      idleTips: { wordTheDay: false, duration: 2500, interval: 8000, message: theme.live2d.tips || ['今天也要元气满满哦～'] }
+    },
+    menus: { disable: false }
+  }) %>);
+</script>
+<% } %>
 <% if (theme.comment && theme.comment.type === 'giscus' && theme.comment.giscus && theme.comment.giscus.repo && theme.comment.giscus.repo_id && theme.comment.giscus.category_id) { %>
 <script src="https://giscus.app/client.js"
   data-repo="<%= theme.comment.giscus.repo %>"

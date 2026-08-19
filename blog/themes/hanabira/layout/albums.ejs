@@ -1,0 +1,23 @@
+<div class="container">
+  <h1 class="page-title reveal"><svg viewBox="0 0 24 24" style="width:28px;height:28px;vertical-align:-4px"><use href="#i-image"></use></svg> 相册</h1>
+  <% if (theme.albums && theme.albums.length) { %>
+    <div class="album-tabs reveal">
+      <button class="album-tab active" data-group="*">全部</button>
+      <% theme.albums.forEach(function (g, gi) { %>
+        <button class="album-tab" data-group="g<%= gi %>"><%= g.name %></button>
+      <% }) %>
+    </div>
+    <div class="album-grid">
+      <% theme.albums.forEach(function (g, gi) { %>
+        <% (g.images || []).forEach(function (src) { %>
+          <figure class="album-item reveal" data-group="g<%= gi %>">
+            <img src="<%- url_for(src) %>" alt="<%= g.name %>" loading="lazy">
+            <% if (g.name) { %><figcaption><%= g.name %></figcaption><% } %>
+          </figure>
+        <% }) %>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="glass empty">还没有照片，去主题 _config.yml 里配置 albums 相册吧～</div>
+  <% } %>
+</div>

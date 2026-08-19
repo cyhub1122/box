@@ -1,7 +1,16 @@
-<section class="hero">
+<%
+  var banners = (theme.hero && theme.hero.banner) ? theme.hero.banner : [];
+%>
+<section class="hero<%= banners.length ? ' has-banner' : '' %>">
+  <% if (banners.length) { %>
+    <div class="hero-banner" aria-hidden="true">
+      <% banners.forEach(function (src) { %><div class="hb-item" style="background-image:url('<%- url_for(src) %>')"></div><% }) %>
+    </div>
+  <% } %>
   <div class="hero-inner">
     <h1 class="reveal"><%= theme.blog_title %></h1>
     <% if (theme.effects.typewriter) { %><div class="typewriter" aria-label="站点简介"></div><% } %>
-    <% if (theme.hero.greeting) { %><p class="hero-sub"><%= theme.hero.greeting %></p><% } %>
+    <% if (theme.subtitle) { %><p class="hero-desc"><%= theme.subtitle %></p><% } %>
+    <% if (theme.hero && theme.hero.greeting) { %><p class="hero-sub"><%= theme.hero.greeting %></p><% } %>
   </div>
 </section>

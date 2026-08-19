@@ -1,7 +1,8 @@
-# Hanabira 主题配置
+# Hanabira（花瓣）主题配置
 # ==================
-# 站点基本信息（用于侧边栏个人卡 / 顶部品牌）
+# 站点基本信息
 blog_title: 我的个人博客
+subtitle: 记录生活的每一片花瓣
 logo: 花瓣
 author: cyhub1122
 avatar: /images/avatar.jpg
@@ -15,6 +16,7 @@ nav:
   - { title: 归档, link: /archives/, icon: archive }
   - { title: 分类, link: /categories/, icon: categories }
   - { title: 标签, link: /tags/, icon: tags }
+  - { title: 相册, link: /albums/, icon: image }
   - { title: 关于, link: /about/, icon: about }
   - { title: 友链, link: /friends/, icon: friends }
 
@@ -28,13 +30,41 @@ socials:
 friends:
   - { name: 示例友链 A, avatar: /images/avatar.jpg, url: https://example.com, desc: 写着漂亮代码的人 }
 
+# 网站信息
+site_info:
+  since: 2026-08-19   # 建站日期 YYYY-MM-DD，用于计算运行天数
+
+# 主题外观
+appearance:
+  accent_hue: 330     # 主色相 0-360（访客可切换，默认 330 为粉）
+  wallpaper:
+    mode: gradient    # gradient / image / none
+    images: []        # 全屏壁纸图数组（mode=image 时启用轮播）
+    blur: 0           # 背景模糊 px
+    opacity: 0.5      # 背景不透明度 0-1
+
 # 特效开关
 effects:
   sakura: true        # 樱花飘落
+  firefly: true       # 萤火虫
+  snow: false         # 雪花飘落（冬季模式，访客可切换）
+  danmaku: true       # 背景弹幕
+  click_effect: true  # 鼠标点击特效
+  splash: true        # 开场加载动画
   typewriter: true    # 首页打字机
   dark_mode: true     # 深浅色切换
   reading_progress: true  # 阅读进度条
   cursor_glow: true   # 鼠标光晕
+  back_to_top: true   # 回到顶部
+
+# 背景弹幕文案
+danmaku:
+  - 在干嘛呢？
+  - 前方高能反应！
+  - BUG 修复进度 99%
+  - 今天背单词了吗？
+  - 写代码中...
+  - 睡大觉中
 
 # 首页 hero
 hero:
@@ -43,11 +73,48 @@ hero:
     - 欢迎来到我的小站
     - 一个关于代码与生活的角落
     - 每一片花瓣都是一段故事
+  banner: []          # 顶部横幅轮播图（可选，留空使用渐变背景）
 
 # 文章卡片
 card:
   show_cover: true    # 显示封面（无封面则使用渐变占位）
   show_excerpt: true
+
+# 搜索
+search:
+  enable: true
+
+# 音乐播放器（local 模式：自定义歌单；留空 url 则不播放）
+music:
+  enable: false
+  autoplay: false
+  list:
+    - { name: '', artist: '', url: '', cover: '', lrc: '' }
+
+# 图片灯箱
+lightbox: true
+
+# Live2D 看板娘（基于 oh-my-live2d CDN）
+live2d:
+  enable: true         # 是否显示看板娘
+  model: https://model.oml2d.com/Pio/model.json  # 模型路径，可用 Hiyori / Pio / Haru / Mao 等
+  position: left       # left / right
+  scale: 1             # 缩放比例
+  mobile_show: false   # 移动端是否显示
+  welcome: 欢迎来到喵の小站～
+  tips:
+    - 今天也要元气满满哦～
+    - 写代码中，勿扰喵
+    - 主人记得喝水哦
+
+# 照片墙（相册），name 为分组名，images 为图片路径数组
+albums:
+  - name: 日常
+    images:
+      - /images/avatar.jpg
+  - name: 风景
+    images:
+      - /images/avatar.jpg
 
 # 评论系统（可选，暂不启用则留空 type）
 comment:

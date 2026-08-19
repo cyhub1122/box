@@ -19,6 +19,10 @@
       <div class="stat"><div class="num"><%= site.posts.length %></div><div class="label">文章</div></div>
       <div class="stat"><div class="num"><%= site.categories.length %></div><div class="label">分类</div></div>
       <div class="stat"><div class="num"><%= site.tags.length %></div><div class="label">标签</div></div>
+      <% if (theme.site_info && theme.site_info.since) { %>
+      <div class="stat"><div class="num"><%= runningDays(theme.site_info.since) %></div><div class="label">运行天数</div></div>
+      <% } %>
+      <div class="stat"><div class="num"><%= totalWords(site.posts) %></div><div class="label">总字数</div></div>
     </div>
   </div>
 

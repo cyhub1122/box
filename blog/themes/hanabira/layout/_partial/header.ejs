@@ -27,8 +27,18 @@
       </ul>
     </nav>
     <div class="nav-actions">
+      <% if (theme.search && theme.search.enable !== false) { %>
+      <button class="search-toggle" aria-label="搜索">
+        <svg viewBox="0 0 24 24"><use href="#i-search"></use></svg>
+      </button>
+      <% } %>
+      <% if (theme.effects.dark_mode !== false) { %>
       <button class="theme-toggle" aria-label="切换深浅色主题">
         <svg viewBox="0 0 24 24"><use href="#i-moon"></use></svg>
+      </button>
+      <% } %>
+      <button class="winter-toggle" aria-label="切换冬季下雪模式">
+        <svg viewBox="0 0 24 24"><use href="#i-snow"></use></svg>
       </button>
       <button class="nav-burger" aria-label="打开菜单">
         <svg viewBox="0 0 24 24"><use href="#i-menu"></use></svg>

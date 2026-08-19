@@ -5,15 +5,96 @@
 </head>
 <body>
   <%- partial('_partial/icons') %>
-  <% if (theme.effects.sakura) { %><canvas id="sakura-canvas" aria-hidden="true"></canvas><% } %>
+
+  <% if (theme.effects.splash) { %>
+  <div id="splash" aria-hidden="true">
+    <div class="splash-inner">
+      <div class="splash-logo"><%= theme.logo || theme.blog_title %></div>
+      <div class="splash-bar"><span></span></div>
+    </div>
+  </div>
+  <% } %>
+
+  <%
+    var wp = (theme.appearance && theme.appearance.wallpaper) ? theme.appearance.wallpaper : {};
+    var wpBlur = wp.blur != null ? wp.blur : 0;
+    var wpOpacity = wp.opacity != null ? wp.opacity : 0.5;
+  %>
+  <% if (wp.mode === 'image' && wp.images && wp.images.length) { %>
+    <div class="wallpaper-layer" style="--wp-blur:<%= wpBlur %>px;--wp-opacity:<%= wpOpacity %>" aria-hidden="true">
+      <% wp.images.forEach(function (src) { %><div class="wp-item" style="background-image:url('<%- url_for(src) %>')"></div><% }) %>
+    </div>
+  <% } %>
+
   <% if (theme.effects.cursor_glow) { %><div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div><% } %>
+  <% if (theme.effects.sakura) { %><canvas id="sakura-canvas" aria-hidden="true"></canvas><% } %>
+  <% if (theme.effects.firefly) { %><canvas id="firefly-canvas" aria-hidden="true"></canvas><% } %>
+  <canvas id="snow-canvas" aria-hidden="true"></canvas>
+  <% if (theme.effects.danmaku && theme.danmaku && theme.danmaku.length) { %><canvas id="danmaku-canvas" aria-hidden="true"></canvas><% } %>
   <% if (theme.effects.reading_progress) { %><div class="reading-progress" aria-hidden="true"></div><% } %>
+
   <%- partial('_partial/header') %>
   <%- body %>
   <%- partial('_partial/footer') %>
+
+  <% if (theme.effects.back_to_top !== false) { %>
   <button class="back-to-top" aria-label="回到顶部">
     <svg viewBox="0 0 24 24"><use href="#i-arrow-up"></use></svg>
   </button>
+  <% } %>
+
+  <% if (theme.music && theme.music.enable) { %>
+  <button class="music-fab" id="music-fab" aria-label="音乐播放器">
+    <svg viewBox="0 0 24 24"><use href="#i-music"></use></svg>
+  </button>
+  <section class="music-panel glass" id="music-panel" aria-label="音乐播放器">
+    <div class="mp-cover" id="mp-cover">
+      <svg viewBox="0 0 24 24"><use href="#i-music"></use></svg>
+    </div>
+    <div class="mp-body">
+      <div class="mp-title" id="mp-title">未在播放</div>
+      <div class="mp-artist" id="mp-artist">—</div>
+      <div class="mp-progress"><div class="mp-bar" id="mp-bar"></div></div>
+      <div class="mp-time"><span id="mp-cur">00:00</span><span id="mp-dur">00:00</span></div>
+      <div class="mp-controls">
+        <button id="mp-prev" aria-label="上一首"><svg viewBox="0 0 24 24"><use href="#i-prev"></use></svg></button>
+        <button id="mp-play" class="mp-play" aria-label="播放/暂停"><svg viewBox="0 0 24 24"><use href="#i-play"></use></svg></button>
+        <button id="mp-next" aria-label="下一首"><svg viewBox="0 0 24 24"><use href="#i-next"></use></svg></button>
+      </div>
+      <ul class="mp-playlist" id="mp-list"></ul>
+    </div>
+  </section>
+  <% } %>
+
+  <button class="hue-fab" id="hue-fab" aria-label="切换主题色">
+    <svg viewBox="0 0 24 24"><use href="#i-palette"></use></svg>
+  </button>
+  <div class="hue-panel glass" id="hue-panel" aria-label="主题色选择">
+    <% [330, 0, 25, 145, 190, 220, 270].forEach(function (h) { %>
+      <button class="hue-dot" data-hue="<%= h %>" style="background:hsl(<%= h %> 80% 62%)" aria-label="色相 <%= h %>"></button>
+    <% }) %>
+  </div>
+
+  <% if (theme.search && theme.search.enable !== false) { %>
+  <div class="search-overlay" id="search-overlay" aria-hidden="true">
+    <div class="search-box glass">
+      <div class="search-head">
+        <svg viewBox="0 0 24 24"><use href="#i-search"></use></svg>
+        <input type="text" id="search-input" placeholder="搜索文章标题 / 标签 / 正文…" autocomplete="off">
+        <button class="search-close" id="search-close" aria-label="关闭"><svg viewBox="0 0 24 24"><use href="#i-close"></use></svg></button>
+      </div>
+      <ul class="search-results" id="search-results"></ul>
+    </div>
+  </div>
+  <% } %>
+
+  <% if (theme.lightbox !== false) { %>
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" aria-label="关闭"><svg viewBox="0 0 24 24"><use href="#i-close"></use></svg></button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+  <% } %>
+
   <%- partial('_partial/scripts') %>
 </body>
 </html>
